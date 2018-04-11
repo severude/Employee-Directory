@@ -4,12 +4,15 @@ $.ajax({
   success: function(data) {
       let employeeHTML = '<ul>';
       $.each(data.results,function(i,employee) {
-      	employeeHTML += '<li class="grid-25 tablet-grid-30">';
-      	employeeHTML += '<a href="' + employee.picture.large + '" class="image">';
-        employeeHTML += '<div class="tablet-grid-50"><img src="' + employee.picture.large + '"></div>';
-		employeeHTML += '<div class="tablet-grid-50"><h6>' + employee.name.first + ' ' + employee.name.last + '</h6>';
-		employeeHTML += '<p>' + employee.email + '</p>';
-		employeeHTML += '<p>' + employee.location.city + '</p>';
+      	employeeHTML += '<li>';
+      	employeeHTML += '<a class="card" href="' + employee.picture.large + '">';
+        employeeHTML += '<div class="image-container">';
+		employeeHTML += '<img src="' + employee.picture.medium + '">';
+		employeeHTML += '</div>';
+		employeeHTML += '<div class="info-block">';
+		employeeHTML += '<p class="name">' + employee.name.first + ' ' + employee.name.last + '</p>';
+		employeeHTML += '<p class="email">' + employee.email + '</p>';
+		employeeHTML += '<p class="city">' + employee.location.city + '</p>';
 		employeeHTML += '</div></a></li>';
       }); // end each
       employeeHTML += '</ul>';
