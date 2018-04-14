@@ -14,6 +14,11 @@ $.ajax({
 		  employeeHTML += '<p class="name">' + employee.name.first + ' ' + employee.name.last + '</p>';
 		  employeeHTML += '<p class="email">' + employee.email + '</p>';
 		  employeeHTML += '<p class="city">' + employee.location.city + '</p>';
+		  employeeHTML += '<p class="hidden">' + employee.login.username + '</p>';
+		  employeeHTML += '<p class="hidden">' + employee.cell + '</p>';
+		  employeeHTML += '<p class="hidden">' + employee.location.street + ' ' + employee.location.city +
+			  ' ' + employee.location.state + ' ' + employee.location.postcode + '</p>';
+		  employeeHTML += '<p class="hidden">Birthday: ' + employee.dob.split(" ", 1) + '</p>';
 		  employeeHTML += '</div></a></li>';
       }); // end each
       employeeHTML += '</ul>';
@@ -30,8 +35,16 @@ let $name = $('<p class="name"></p>');
 $content.append($name);
 let $email = $('<p class="email"></p>');
 $content.append($email);
-let $city = $('<p class="city"></p>');
-$content.append($city);
+let $username = $('<p class="username"></p>');
+$content.append($username);
+let $hr = $('<hr>');
+$content.append($hr);
+let $phone = $('<p class="phone"></p>');
+$content.append($phone);
+let $address = $('<p class="address"></p>');
+$content.append($address);
+let $birthdate = $('<p class="birthdate"></p>');
+$content.append($birthdate);
 $overlay.append($content);
 $('body').append($overlay);
 
@@ -44,8 +57,14 @@ $('#employee').on('click', 'a', function(event){
 	$name.text(name);
 	let email = $(this).children("div").children("p")[1].textContent;
 	$email.text(email);
-	let city = $(this).children("div").children("p")[2].textContent;
-	$city.text(city);
+	let username = $(this).children("div").children("p")[3].textContent;
+	$username.text(username);
+	let phone = $(this).children("div").children("p")[4].textContent;
+	$phone.text(phone);
+	let address = $(this).children("div").children("p")[5].textContent;
+	$address.text(address);
+	let birthdate = $(this).children("div").children("p")[6].textContent;
+	$birthdate.text(birthdate);
 
 	$overlay.show();
 });
