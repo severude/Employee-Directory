@@ -82,16 +82,59 @@ li .card .info-block .city {
 	color: #919191;
 }
 
+/* Styles for the modal overlay */
+#overlay {
+	background: rgba(0,0,0,0.7);
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: none;
+	text-align: center;
+}
+#content {
+	background-color: #fefefe;
+	margin: 15% auto;
+	padding: 1.25em;
+	border: 1px solid #888;
+	width: 30%;
+}
+#content img {
+	margin-top: 10%;
+	border-radius: 50%;
+}
+#content .name {
+	font-size: 1.25em;
+	font-weight: bold;
+	margin: 1.5em auto 0;
+}
+#content .email {
+	font-size: .75em;
+	margin: .25em 0;
+	color: #919191;
+}
+#content .city {
+	font-size: .75em;
+	margin: 0;
+	color: #919191;
+}
+
 /* Mobile settings - 2 cards wide */
 @media screen and (max-width: 770px) {
 	li {
 		width: 47%;
 	}
+	#content {
+		width: 40%;
+	}
 }
-
-/* Mobile settings - 2 card wide */
+/* Mobile settings - 1 card wide */
 @media screen and (max-width: 480px) {
 	li {
 		width: 97%;
+	}
+	#content {
+		width: 60%;
 	}
 }
