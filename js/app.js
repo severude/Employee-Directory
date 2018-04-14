@@ -4,7 +4,7 @@ $.ajax({
   dataType: 'json',
   success: function(data) {
       let employeeHTML = '<ul class="clearfix">';
-      $.each(data.results,function(i,employee) {
+      $.each(data.results,function(index,employee) {
 		  employeeHTML += '<li>';
 		  employeeHTML += '<a class="card" href="' + employee.picture.large + '">';
 		  employeeHTML += '<div class="image-container">';
@@ -18,7 +18,10 @@ $.ajax({
 		  employeeHTML += '<p class="hidden">' + employee.cell + '</p>';
 		  employeeHTML += '<p class="hidden">' + employee.location.street + ' ' + employee.location.city +
 			  ' ' + employee.location.state + ' ' + employee.location.postcode + '</p>';
-		  employeeHTML += '<p class="hidden">Birthday: ' + employee.dob.split(" ", 1) + '</p>';
+		  let dob = employee.dob.split(" ", 1)[0];  // Copy dob as a string
+		  const regex = /(\d{4})-(\d{2})-(\d{2})/;  // Regex formula to capture 3 groups of numbers
+		  let birthdate = dob.replace(regex, '$2/$3/$1');  // Reformat the number groups into new format
+		  employeeHTML += '<p class="hidden">Birthday: ' + birthdate + '</p>';
 		  employeeHTML += '</div></a></li>';
       }); // end each
       employeeHTML += '</ul>';
@@ -29,6 +32,8 @@ $.ajax({
 // Build a modal overlay
 let $overlay = $('<div id="overlay"></div>');
 let $content = $('<div id="content"></div>');
+let $button = $('<p id="close">X</p>');
+$content.append($button);
 let $image = $('<img>');
 $content.append($image);
 let $name = $('<p class="name"></p>');
@@ -70,6 +75,6 @@ $('#employee').on('click', 'a', function(event){
 });
 
 // Hide overlay if clicked
-$overlay.click(function() {
+$button.click(function() {
   $overlay.hide();
 });

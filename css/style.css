@@ -101,8 +101,12 @@ li .card .info-block .city {
 	border-radius: 5px;
 	width: 30%;
 }
+#content #close {
+	margin: 0;
+	text-align: right;
+	font-weight: bold;
+}
 #content img {
-	margin-top: 10%;
 	border-radius: 50%;
 }
 #content .name {
