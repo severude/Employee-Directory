@@ -14,11 +14,36 @@ body {
 }
 
 /* Styles for header */
-.intro {
+.page-header h1 {
+	float: left;
 	font-size: 1em;
 	color: #919191;
 	margin: 2em 0 1em 2.5em;
 }
+.page-header .employee-search {
+	float: right;
+	margin: 1.5em 2.5em 0 0;
+}
+.page-header .employee-search input {
+	border-radius: 5px;
+	border: 1px solid #eaeaea;
+	padding: 8px 15px;
+	font-size: 14px;
+}
+.page-header .employee-search button {
+	border-radius: 5px;
+	border: 1px solid #eaeaea;
+	padding: 8px 15px;
+	font-size: 14px;
+	background-color: #4ba6c3;
+	color: #fff
+}
+.page-header .employee-search .search-message {
+	margin-top: 16px;
+	color: #555;
+	font-weight: bold;
+}
+
 
 /* Styles for each employee list item */
 li {

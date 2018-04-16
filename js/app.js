@@ -1,9 +1,9 @@
 // AJAX call to retrieve 12 employees
 $.ajax({
-  url: 'https://randomuser.me/api/?results=12',
+  url: 'https://randomuser.me/api/?results=12&nat=us',
   dataType: 'json',
   success: function(data) {
-      let employeeHTML = '<ul class="clearfix">';
+      let employeeHTML = '<ul class="employee-list">';
       $.each(data.results,function(index,employee) {
 		  employeeHTML += '<li>';
 		  employeeHTML += '<a class="card" href="' + employee.picture.large + '">';
@@ -16,8 +16,8 @@ $.ajax({
 		  employeeHTML += '<p class="city">' + employee.location.city + '</p>';
 		  employeeHTML += '<p class="hidden">' + employee.login.username + '</p>';
 		  employeeHTML += '<p class="hidden">' + employee.cell + '</p>';
-		  employeeHTML += '<p class="hidden">' + employee.location.street + ' ' + employee.location.city +
-			  ' ' + employee.location.state + ' ' + employee.location.postcode + '</p>';
+		  employeeHTML += '<p class="hidden">' + employee.location.street + ', ' + employee.location.city +
+			  ', ' + employee.location.state + ' ' + employee.location.postcode + '</p>';
 		  let dob = employee.dob.split(" ", 1)[0];  // Copy dob as a string
 		  const regex = /(\d{4})-(\d{2})-(\d{2})/;  // Regex formula to capture 3 groups of numbers
 		  let birthdate = dob.replace(regex, '$2/$3/$1');  // Reformat the number groups into new format
@@ -32,8 +32,8 @@ $.ajax({
 // Build a modal overlay
 let $overlay = $('<div id="overlay"></div>');
 let $content = $('<div id="content"></div>');
-let $button = $('<p id="close">X</p>');
-$content.append($button);
+let $close = $('<p id="close">X</p>');
+$content.append($close);
 let $image = $('<img>');
 $content.append($image);
 let $name = $('<p class="name"></p>');
@@ -75,6 +75,53 @@ $('#employee').on('click', 'a', function(event){
 });
 
 // Hide overlay if clicked
-$button.click(function() {
+$close.click(function() {
   $overlay.hide();
 });
+
+// Search employee list based on input element search parameters
+function searchList() {
+	// Get the search value in lowercase
+	let searchValue = document.getElementsByTagName('input')[0].value.toLowerCase();
+	
+	// Hide all the employees on the page
+	let employeeList = document.querySelector(".employee-list").children;
+	for (let index = 0; index < employeeList.length; index++) {
+		employeeList[index].style.display = "none";
+	}
+	
+	// Storage for all employee matches
+	let matches = [];
+	
+	// Test all employees on the page for the search match
+	for (let index = 0; index < employeeList.length; index++) {
+		// Capture name element
+		let name = employeeList[index].getElementsByTagName("p")[0].innerHTML.toLowerCase();
+		// Capture username element
+		let username = employeeList[index].getElementsByTagName("p")[3].innerHTML.toLowerCase();
+		
+		// Test if element contains text from search field
+		if(name.indexOf(searchValue) > -1 || username.indexOf(searchValue) > -1) {
+			matches.push(employeeList[index]);
+		} 
+	}
+
+	// Message if no employees were found
+	let searchMessage = document.querySelector('.search-message');
+	if(matches.length === 0) {
+		searchMessage.textContent = "Sorry, no employees were found";
+	} else {
+		searchMessage.textContent = "";
+	}
+
+	// Display employees that match
+	for (var index = 0; index < matches.length; index++) {
+		matches[index].style.display = "block";
+	}
+	
+	// Clear search box
+	searchValue.value = "";
+}
+
+// Add event listener to call the searchList function
+$('button').on('click', searchList);
