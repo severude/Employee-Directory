@@ -139,7 +139,7 @@
 		}
 
 		// Clear search box
-		searchValue.value = "";
+		document.getElementsByTagName('input')[0].value = "";
 	}
 
 	// Add click handler for searching
@@ -147,7 +147,7 @@
 
 	// Logic to determine when to show or hide the overlay arrows
 	function showOverlayArrows() {
-		let employeeCount = document.querySelector(".employee-list").children.length;
+		let employeeCount = $(".employee-list li").length;
 		if(elementIndex+1 === employeeCount) {
 			$('.next').hide();
 		} else {
