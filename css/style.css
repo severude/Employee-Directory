@@ -46,6 +46,9 @@ body {
 
 
 /* Styles for each employee list item */
+.employee-list {
+	margin: 0;
+}
 li {
 	float: left;
 	width: 30%;
@@ -130,14 +133,36 @@ li .card .info-block .city {
 	margin: 0;
 	text-align: right;
 	font-weight: bold;
+	color: #919191;
+}
+#content #close:hover {
+	color: #3a3a3a;
 }
 #content img {
 	border-radius: 50%;
 }
+#content .previous {
+	float: left;
+	font-size: 1.5em;
+	font-weight: bold;
+	color: #919191;
+}
+#content .previous:hover {
+	color: #3a3a3a;
+}
+#content .next {
+	float: right;
+	font-size: 1.5em;
+	font-weight: bold;
+	color: #919191;
+}
+#content .next:hover {
+	color: #3a3a3a;
+}
 #content .name {
 	font-size: 1.25em;
 	font-weight: bold;
-	margin: 1.5em auto 0;
+	margin: .9em auto 0;
 }
 #content .email {
 	font-size: .75em;
