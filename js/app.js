@@ -4,7 +4,7 @@
 (function employeeDirectory() {
 	let elementIndex = 0; // Saves the index of last clicked employee 
 	
-	// AJAX call to retrieve 12 employees
+	// AJAX call to retrieve 12 employees from the United States
 	$.ajax({
 	  url: 'https://randomuser.me/api/?results=12&nat=us',
 	  dataType: 'json',
@@ -12,22 +12,21 @@
 		  let employeeHTML = '<ul class="employee-list">';
 		  $.each(data.results,function(index,employee) {
 			  employeeHTML += '<li>';
-			  employeeHTML += '<a class="card" href="' + employee.picture.large + '">';
+			  employeeHTML += `<a class="card" href="${employee.picture.large}">`;
 			  employeeHTML += '<div class="image-container">';
-			  employeeHTML += '<img src="' + employee.picture.medium + '">';
+			  employeeHTML += `<img src="${employee.picture.medium}">`;
 			  employeeHTML += '</div>';
 			  employeeHTML += '<div class="info-block">';
-			  employeeHTML += '<p class="name">' + employee.name.first + ' ' + employee.name.last + '</p>';
-			  employeeHTML += '<p class="email">' + employee.email + '</p>';
-			  employeeHTML += '<p class="city">' + employee.location.city + '</p>';
-			  employeeHTML += '<p class="hidden">' + employee.login.username + '</p>';
-			  employeeHTML += '<p class="hidden">' + employee.cell + '</p>';
-			  employeeHTML += '<p class="hidden">' + employee.location.street + ', ' + employee.location.city +
-				  ', ' + employee.location.state + ' ' + employee.location.postcode + '</p>';
+			  employeeHTML += `<p class="name">${employee.name.first} ${employee.name.last}</p>`;
+			  employeeHTML += `<p class="email">${employee.email}</p>`;
+			  employeeHTML += `<p class="city">${employee.location.city}</p>`;
+			  employeeHTML += `<p class="hidden">${employee.login.username}</p>`;
+			  employeeHTML += `<p class="hidden">${employee.cell}</p>`;
+			  employeeHTML += `<p class="hidden">${employee.location.street}, ${employee.location.city}, 					${employee.location.state} ${employee.location.postcode}</p>`;
 			  let dob = employee.dob.split(" ", 1)[0];  // Copy dob as a string
 			  const regex = /(\d{4})-(\d{2})-(\d{2})/;  // Regex formula to capture 3 groups of numbers
 			  let birthdate = dob.replace(regex, '$2/$3/$1');  // Reformat the number groups into new format
-			  employeeHTML += '<p class="hidden">Birthday: ' + birthdate + '</p>';
+			  employeeHTML += `<p class="hidden">Birthday: ${birthdate}</p>`;
 			  employeeHTML += '</div></a></li>';
 		  }); // end each
 		  employeeHTML += '</ul>';
@@ -120,7 +119,7 @@
 			let username = employeeList[index].getElementsByTagName("p")[3].innerHTML.toLowerCase();
 
 			// Test if element contains text from search field
-			if(name.indexOf(searchValue) > -1 || username.indexOf(searchValue) > -1) {
+			if(name.includes(searchValue) || username.includes(searchValue)) {
 				matches.push(employeeList[index]);
 			} 
 		}
@@ -174,5 +173,5 @@
 	$('.previous').on('click', previousCard);
 	$('.next').on('click', nextCard);
 
-	// End Employee Directory Module
+// End Employee Directory Module
 }());
