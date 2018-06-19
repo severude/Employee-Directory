@@ -23,7 +23,7 @@
 			  employeeHTML += `<p class="hidden">${employee.login.username}</p>`;
 			  employeeHTML += `<p class="hidden">${employee.cell}</p>`;
 			  employeeHTML += `<p class="hidden">${employee.location.street}, ${employee.location.city}, 					${employee.location.state} ${employee.location.postcode}</p>`;
-			  let dob = employee.dob.split(" ", 1)[0];  // Copy dob as a string
+			  let dob = employee.dob.date.substr(0,10);  // Copy dob as a string
 			  const regex = /(\d{4})-(\d{2})-(\d{2})/;  // Regex formula to capture 3 groups of numbers
 			  let birthdate = dob.replace(regex, '$2/$3/$1');  // Reformat the number groups into new format
 			  employeeHTML += `<p class="hidden">Birthday: ${birthdate}</p>`;
